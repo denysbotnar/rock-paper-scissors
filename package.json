@@ -8,18 +8,21 @@
     "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "knex": "^0.19.5",
     "morgan": "^1.9.1",
     "prop-types": "^15.7.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "sqlite3": "^4.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server:dev": "nodemon server/server.js --watch"
+    "server:dev": "nodemon server/server.js --watch",
+    "migrate": "knex migrate:latest"
   },
   "eslintConfig": {
     "extends": "react-app"

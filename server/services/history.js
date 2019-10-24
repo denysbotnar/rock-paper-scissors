@@ -1,14 +1,21 @@
+const db = require('../db');
+
 class HistoryService {
   static get tableName() {
-    return 'history';
+    return 'games';
+  }
+
+  static get histories() {
+    return db(this.tableName);
   }
 
   static async getAll() {
-    return Promise.resolve([]);
+    const histories = await this.histories.select('*');
+    return histories;
   }
 
-  static async create() {
-    return undefined;
+  static async create(history) {
+    return this.histories.insert(history);
   }
 }
 
