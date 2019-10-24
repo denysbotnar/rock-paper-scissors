@@ -14,8 +14,12 @@ routes.get('/', async (req, res) => {
 
 routes.post('/', async (req, res) => {
   // create new history record
+  const { type, winner } = req.body;
+  if (!type || !winner) {
+    return res.status(400).send('Bad data');
+  }
   try {
-    await HistoryService.create(req.body);
+    await HistoryService.create({ type, winner });
     res.send('OK');
   } catch (error) {
     console.error(error);
