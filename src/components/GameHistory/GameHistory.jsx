@@ -2,41 +2,20 @@ import React from 'react';
 import {
   Table, TableRow, TableHead, TableCell, Paper, TableBody,
 } from '@material-ui/core';
+import PropTypes from 'prop-types';
+import useStyles from './styles';
 
 const tableEntries = {
-  date: 'Date',
+  created_at: 'Date',
   type: 'Type',
   winner: 'Winner',
 };
 
-const historyMock = [
-  {
-    id: 1, date: new Date().toDateString(), type: 'AI vs Player', winner: 'AI',
-  },
-  {
-    id: 2, date: new Date().toDateString(), type: 'AI vs Player', winner: 'AI',
-  },
-  {
-    id: 3, date: new Date().toDateString(), type: 'AI vs Player', winner: 'Player',
-  },
-  {
-    id: 4, date: new Date().toDateString(), type: 'AI vs Player', winner: 'Player',
-  },
-  {
-    id: 5, date: new Date().toDateString(), type: 'AI vs AI', winner: 'AI',
-  },
-  {
-    id: 6, date: new Date().toDateString(), type: 'AI vs Player', winner: 'Player',
-  },
-  {
-    id: 7, date: new Date().toDateString(), type: 'AI vs Player', winner: 'Player',
-  },
-];
-
-export default function GameHistory() {
+export default function GameHistory({ histories }) {
+  const classes = useStyles();
   return (
-    <Paper elevation={3}>
-      <Table>
+    <Paper elevation={3} className={classes.tableWrapper}>
+      <Table stickyHeader>
         <TableHead>
           <TableRow>
             {Object.entries(tableEntries).map(([key, label]) => (
@@ -47,13 +26,22 @@ export default function GameHistory() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {historyMock.map((game) => (
+          {histories.map((game) => (
             <TableRow key={game.id}>
-              {Object.keys(tableEntries).map((key) => (
-                <TableCell key={key}>
-                  {game[key]}
-                </TableCell>
-              ))}
+              {Object.keys(tableEntries).map((key) => {
+                if (key === 'created_at') {
+                  return (
+                    <TableCell key={key}>
+                      {new Date(`${game[key]} UTC`).toLocaleString()}
+                    </TableCell>
+                  );
+                }
+                return (
+                  <TableCell key={key}>
+                    {game[key]}
+                  </TableCell>
+                );
+              }) }
             </TableRow>
           ))}
         </TableBody>
@@ -61,3 +49,11 @@ export default function GameHistory() {
     </Paper>
   );
 }
+GameHistory.propTypes = {
+  histories: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    type: PropTypes.string.isRequired,
+    winner: PropTypes.string.isRequired,
+    created_at: PropTypes.isRequired,
+  })).isRequired,
+};

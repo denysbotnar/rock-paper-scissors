@@ -12,6 +12,12 @@ const styles = (theme) => createStyles({
   progressBar: {
     position: 'absolute', top: 0, left: 0, width: '100%',
   },
+  button: {
+    [theme.breakpoints.down('sm')]: {
+      width: '100%',
+    },
+    width: '50%',
+  },
 });
 
 const useStyles = makeStyles(styles);
