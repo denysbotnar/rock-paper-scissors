@@ -1,15 +1,16 @@
 import { createStyles, makeStyles } from '@material-ui/core';
 
 const styles = (theme) => createStyles({
-  app: {
-    textAlign: 'center',
-    backgroundColor: 'lightgrey',
-    height: '100vh',
-    padding: theme.spacing(3),
+  root: {
+    height: '100%',
+    position: 'relative',
   },
   container: {
-    height: '97%',
-    padding: theme.spacing(2),
+    height: '100%',
+    padding: theme.spacing(1),
+  },
+  progressBar: {
+    position: 'absolute', top: 0, left: 0, width: '100%',
   },
 });
 
