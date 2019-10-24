@@ -18,7 +18,7 @@ function App() {
     <Grid container className={classes.app} justify="center">
       <Grid item xs={12} sm={9}>
         <Paper className={classes.container}>
-          <Grid container spacing={5} direction="column" style={{ height: '100%' }}>
+          <Grid container spacing={5} direction="column" style={{ height: '100%' }} wrap="nowrap">
             <Grid item>
               <GameOptions
                 selected={selected}
