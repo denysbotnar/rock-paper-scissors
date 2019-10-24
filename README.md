@@ -9,6 +9,6 @@ To start FE in dev mode run
 ### `npm start`
 
 To start BE in dev mode
-### `npm server:dev`
+### `npm run server:dev`
 
 
